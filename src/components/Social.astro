@@ -1,0 +1,21 @@
+---
+interface Props {
+    platform: "github" | "bluesky";
+}
+const { platform } = Astro.props;
+const socials = {
+    github: {
+        href: "https://github.com/niLPotential",
+        icon: "i-meteor-icons-github",
+    },
+    bluesky: {
+        href: "https://bsky.app/profile/nilpotential.bsky.social",
+        icon: "i-meteor-icons-bluesky",
+    },
+};
+const { href, icon } = socials[platform];
+---
+
+<a {href}>
+    <div class={icon}></div>
+</a>
