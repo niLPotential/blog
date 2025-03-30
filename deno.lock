@@ -1,6 +1,7 @@
 {
   "version": "4",
   "specifiers": {
+    "npm:@iconify-json/meteor-icons@^1.2.1": "1.2.1",
     "npm:@unocss/reset@^66.1.0-beta.7": "66.1.0-beta.7",
     "npm:astro@^5.5.5": "5.5.5_vite@6.2.3_zod@3.24.2",
     "npm:unocss@^66.1.0-beta.7": "66.1.0-beta.7"
@@ -172,6 +173,12 @@
     },
     "@esbuild/win32-x64@0.25.1": {
       "integrity": "sha512-Y1EQdcfwMSeQN/ujR5VayLOJ1BHaK+ssyk0AEzPjC+t1lITgsnccPqFjb6V+LsTp/9Iov4ysfjxLaGJ9RPtkVg=="
+    },
+    "@iconify-json/meteor-icons@1.2.1": {
+      "integrity": "sha512-SdYI7XPdqhfnbsDpAtyW1471KS/kqn0hu3VfuTHZmGpNw1hFbtKrIIPykk67Nj2M72ScqMrhuPBA1HKQPbDfQQ==",
+      "dependencies": [
+        "@iconify/types"
+      ]
     },
     "@iconify/types@2.0.0": {
       "integrity": "sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg=="
@@ -2432,6 +2439,7 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
+        "npm:@iconify-json/meteor-icons@^1.2.1",
         "npm:@unocss/reset@^66.1.0-beta.7",
         "npm:astro@^5.5.5",
         "npm:unocss@^66.1.0-beta.7"
