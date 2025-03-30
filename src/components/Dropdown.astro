@@ -1,0 +1,48 @@
+<div class="flex justify-center">
+    <div
+        x-data="{
+            open: false,
+            toggle() {
+                if (this.open) {
+                return this.close()
+                }
+                this.$refs.button.focus()
+                this.open = true
+            },
+            close(focusAfter) {
+                if (!this.open) return
+                this.open = false
+                focusAfter && focusAfter.focus()
+            }
+        }"
+        @keydown.escape.prevent.stop="close($refs.button)"
+        @focusin.window="! $refs.panel.contains($event.target) && close()"
+        x-id="['dropdown-button']"
+        class="relative"
+    >
+        <button
+            x-ref="button"
+            @click="toggle()"
+            :aria-expanded="open"
+            :ara-controls="$id('dropdown-button')"
+            type="button"
+        >
+            <span>Actions</span>
+            <span aria-hidden="true">&darr;</span>
+        </button>
+
+        <div
+            x-ref="panel"
+            x-show="open"
+            x-transition
+            @click.outside="close($refs.button)"
+            :id="$id('dropdown-button')"
+            style="display: none;"
+            class="absolute"
+        >
+            <a href="#1" class="block">1</a>
+            <a href="#2" class="block">2</a>
+            <a href="#3" class="block">3</a>
+        </div>
+    </div>
+</div>
