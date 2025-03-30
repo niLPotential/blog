@@ -1,4 +1,9 @@
-import { defineConfig, presetIcons, presetMini } from "unocss";
+import {
+  defineConfig,
+  presetIcons,
+  presetTypography,
+  presetWind3,
+} from "unocss";
 
 export default defineConfig({
   presets: [
@@ -10,6 +15,7 @@ export default defineConfig({
           ),
       },
     }),
-    presetMini(),
+    presetWind3(),
+    presetTypography(),
   ],
 });
