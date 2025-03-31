@@ -1,3 +1,7 @@
+---
+import NavMenu from "../components/NavMenu.astro";
+---
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -8,6 +12,12 @@
         <title>Astro Basics</title>
     </head>
     <body>
-        <slot />
+        <header>
+            <NavMenu />
+        </header>
+        <main>
+            <slot />
+        </main>
+        <footer></footer>
     </body>
 </html>
