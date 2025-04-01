@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import BlogPost from "../../components/BlogPost.astro";
 
 const allPosts = await getCollection("blog");
 ---
@@ -10,9 +11,7 @@ const allPosts = await getCollection("blog");
     <ul>
         {
             allPosts.map((post) => (
-                <li>
-                    <a href={`/posts/${post.id}`}>{post.data.title}</a>
-                </li>
+                <BlogPost url={`/posts/${post.id}`} title={post.data.title} />
             ))
         }
     </ul>
