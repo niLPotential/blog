@@ -1,8 +1,20 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+
+const allPosts = await getCollection("blog");
 ---
 
 <Layout>
     <p>Here are some posts I wrote recently.</p>
+    <ul>
+        {
+            allPosts.map((post) => (
+                <li>
+                    <a href={`/posts/${post.id}`}>{post.data.title}</a>
+                </li>
+            ))
+        }
+    </ul>
     <p>Or how about others written a while back?</p>
 </Layout>
