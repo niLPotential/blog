@@ -8,10 +8,14 @@ const allPosts = await getCollection("blog");
 
 <Layout>
     <p>Here are some posts I wrote recently.</p>
-    <ul>
+    <ul class="flex gap-3">
         {
             allPosts.map((post) => (
-                <BlogPost url={`/posts/${post.id}`} title={post.data.title} />
+                <BlogPost
+                    url={`/posts/${post.id}`}
+                    title={post.data.title}
+                    description={post.data.description}
+                />
             ))
         }
     </ul>
