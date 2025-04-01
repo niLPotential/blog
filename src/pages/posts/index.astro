@@ -6,7 +6,7 @@ import BlogPost from "../../components/BlogPost.astro";
 const allPosts = await getCollection("blog");
 ---
 
-<Layout>
+<Layout title="posts">
     <p>Here are some posts I wrote recently.</p>
     <ul class="flex gap-3">
         {
