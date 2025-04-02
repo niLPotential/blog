@@ -25,4 +25,23 @@ And using methods introduced in tutorials is simply too slow for a pass.
 
 ## When `bufio.Scanner` screws up
 
-## And then we output the results...
+But unfortunately scanning is not a silver bullet.
+The `bufio.Scanner` has a default [`MaxScanTokenSize`](https://pkg.go.dev/bufio#pkg-constants) property, which sets... the maximum token size.
+This should rarely be a problem, if ever.
+After all, how long can a single token be?
+
+Obvious foreshadowings aside, [`#1406`](https://www.acmicpc.net/problem/1406) is an interesting problem.
+The task is to emulate a single-line text editor, moving the cursor left or right, inserting and deleting.
+Again, not too dificult of a problem, except that the editor should contain up to 600,000 characters, and that the initial input can be as long as 100,000 characters.
+This obviously exceeds the default `64*1024` token size.
+Then all inputs after this limit will not be taken in, leading to a wrong answer.
+I found two ways to bypass this problem.
+
+The easier option is actually to use `bufio.Reader` again.
+`Reader.ReadBytes` will simply digest all inputs until a delimiter, in this case `\n`, and return it.
+This of course, comes at a slower execution time, but a slow, working solution is always better than one that fails quickly.
+
+The other option is to still use `bufio.Scanner`, but explicitly specify the size of `Scanner.Buffer`.
+Increasing it to `{expected max input length} + 1` should be enough.
+
+## And then we write the results...
