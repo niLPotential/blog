@@ -21,7 +21,34 @@ And using methods introduced in tutorials is simply too slow for a pass.
 
 ## Gotta read fast: `bufio.Reader`
 
+The `bufio` package is a wrapper around an `io.Reader` or `io.Writer` object, adding buffering and other useful methods.
+To read typed data with a `bufio.Reader`, handing it to `fmt.Fscan` is usually the way to go.
+As many of BOJ's problems require handling of integer type data, this is more than enough to pass most input issues.
+
+But to hit the leaderboards, we can do better.
+
 ## Gotta scan faster: `bufio.Scanner`
+
+`bufio.Scanner` performs better in terms of speed, but handles the data only as text.
+Still, the text data can be converted to integers via `strconv.Atoi` or by implementing such a function manually.
+
+```
+func BytesToInt(barr []byte) (int) {
+  n := 0
+  for _, b := range barr {
+    n *= 10
+    n += int(b-'0')
+  }
+  return n
+}
+```
+
+Personally, I could not recognize any performance differences between using `strconv.Atoi` or my own.
+Unless the data must be parsed a specific way, the standard library seems sufficient.
+
+Another hack around `bufio.Scanner` is to change its `SplitFunc`.
+The `bufio` package already provides functions for scanning a file into lines, bytes, UTF-8-encoded runes, and space-delimited words, with `bufio.ScanLines` being the default.
+Despite that, `Reader.ReadByte` seemed to perform better when reading consecutive bytes.
 
 ## When `bufio.Scanner` screws up
 
@@ -38,10 +65,18 @@ Then all inputs after this limit will not be taken in, leading to a wrong answer
 I found two ways to bypass this problem.
 
 The easier option is actually to use `bufio.Reader` again.
-`Reader.ReadBytes` will simply digest all inputs until a delimiter, in this case `\n`, and return it.
-This of course, comes at a slower execution time, but a slow, working solution is always better than one that fails quickly.
+`Reader.ReadBytes` will simply digest all inputs up to a delimiter, in this case `\n`, and return it.
+This of course, comes at a slower execution speed, but a slow, working solution is always better than one that fails quickly.
 
-The other option is to still use `bufio.Scanner`, but explicitly specify the size of `Scanner.Buffer`.
+The other option is to still use `bufio.Scanner`, but explicitly specifying the size of `Scanner.Buffer`.
 Increasing it to `{expected max input length} + 1` should be enough.
 
-## And then we write the results...
+It is also worth mentioning that `Scanner.Bytes` does no allocation, as per the docs.
+This has sometimes led to peculiar behavior, such as requiring much more buffer than it should need.
+Although explicit allocation easily overgoes this issue.
+
+## Finally, the results are written down...
+
+Fortunately, writing is not as combersome.
+A standard `bufio.Writer` and associated methods should be enough.
+Just remember to `defer Writer.Flush` so that the buffered data is actually flushed to standard output.
