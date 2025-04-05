@@ -1,0 +1,11 @@
+<div
+    x-data="{
+        isDark: false,
+        toggle() {
+            this.isDark = ! this.isDark
+            document.documentElement.classList[this.isDark ? 'add' : 'remove']('dark')
+        }
+    }"
+>
+    <button @click="toggle()">DarkMode</button>
+</div>
