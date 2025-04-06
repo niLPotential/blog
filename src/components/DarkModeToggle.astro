@@ -1,1 +1,9 @@
-<button @click="toggleDarkMode()">DarkMode</button>
+<button
+    x-data="{isDark: true}"
+    x-init="isDark = document.documentElement.classList.contains('dark')"
+    x-on:click="document.documentElement.classList.toggle('dark');
+        isDark = ! isDark;"
+>
+    <div x-show="! isDark" x-cloak class="i-meteor-icons-sun"></div>
+    <div x-show="isDark" x-cloak class="i-meteor-icons-moon"></div>
+</button>
