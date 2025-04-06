@@ -1,11 +1,6 @@
 <div
-    x-data="{
-        isDark: false,
-        toggle() {
-            this.isDark = ! this.isDark
-            document.documentElement.classList[this.isDark ? 'add' : 'remove']('dark')
-        }
-    }"
+    x-data="{isDark: document.documentElement.classList.contains('dark')}"
+    x-effect="document.documentElement.classList[isDark ? 'add' : 'remove']('dark')"
 >
-    <button @click="toggle()">DarkMode</button>
+    <button @click="isDark = ! isDark">DarkMode</button>
 </div>
