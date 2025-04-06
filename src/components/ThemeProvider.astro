@@ -19,6 +19,7 @@
     }"
     x-init="document.documentElement
         .classList[getThemePreference() === 'dark' ? 'add' : 'remove']('dark')"
+    x-cloak
 >
     <slot />
 </div>

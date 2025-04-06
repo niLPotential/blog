@@ -18,4 +18,13 @@ export default defineConfig({
     presetWind3(),
     presetTypography(),
   ],
+  preflights: [
+    {
+      getCSS: ({ theme }) => `
+        [x-cloak] {
+          display: none !important;
+        }
+    `,
+    },
+  ],
 });
